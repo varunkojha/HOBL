@@ -185,7 +185,7 @@ def setup_model(model_name, device):
     print("Downloading model...")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        dtype=torch.float16 if device == 'cuda' else torch.float32,
+        torch_dtype="auto",
         device_map="auto" if device == 'cuda' else None
     )
     # model.resize_token_embeddings(len(tokenizer))
@@ -371,7 +371,7 @@ def main():
     print("Loading model...")
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        dtype=torch.float16 if device == 'cuda' else torch.float32,
+        torch_dtype="auto",
         device_map="auto" if device == 'cuda' else None
     )
     model.resize_token_embeddings(len(tokenizer))

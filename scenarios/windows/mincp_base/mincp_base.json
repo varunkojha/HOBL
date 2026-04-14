@@ -1050,6 +1050,90 @@
                 "type": "End Try"
             },
             {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "MCPLE0",
+                        "include_path": "scenarios\\windows\\_library\\misc\\etw_event_tag",
+                        "params": [
+                            {
+                                "name": "[event_tag]",
+                                "val_options": "",
+                                "value": "CopilotLaunch"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "1",
+                        "description": "Open Start Menu for Copilot launch (PT_10022)",
+                        "enabled": true,
+                        "id": "MCPL01",
+                        "text": "\ue03d",
+                        "type": "Type",
+                        "typing_delay": "[typing_delay]"
+                    },
+                    {
+                        "children": [],
+                        "delay": "1",
+                        "description": "Stabilize Start Menu",
+                        "enabled": true,
+                        "id": "MCPL01D",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "Type copilot and launch",
+                        "enabled": true,
+                        "id": "MCPL02",
+                        "text": "copilot\ue007",
+                        "type": "Type",
+                        "typing_delay": "[typing_delay]"
+                    },
+                    {
+                        "children": [],
+                        "delay": "5",
+                        "description": "Wait for Copilot app to render",
+                        "enabled": true,
+                        "id": "MCPL02D",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "1",
+                        "description": "Close Copilot via Alt+F4",
+                        "enabled": true,
+                        "id": "MCPL03",
+                        "text": "\ue00a\ue034",
+                        "type": "Type",
+                        "typing_delay": "[typing_delay]"
+                    }
+                ],
+                "description": "Best-effort M365 Copilot Warm Launch (PT_10022)",
+                "enabled": true,
+                "id": "MCPLT",
+                "type": "Try"
+            },
+            {
+                "children": [],
+                "description": "Ignore Copilot launch failure",
+                "enabled": true,
+                "id": "MCPLE",
+                "type": "Except"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "MCPLX",
+                "type": "End Try"
+            },
+            {
                 "children": [],
                 "delay": "0",
                 "description": "",

@@ -616,6 +616,15 @@
                 "delay": "0",
                 "description": "",
                 "enabled": true,
+                "id": "W4ESYUL",
+                "include_path": "scenarios\\windows\\_library\\misc\\search_taskbar",
+                "type": "Include"
+            },
+            {
+                "children": [],
+                "delay": "0",
+                "description": "",
+                "enabled": true,
                 "id": "1A4W5AL",
                 "include_path": "scenarios\\windows\\_library\\web\\web_setup",
                 "params": [
@@ -708,32 +717,114 @@
                 "children": [
                     {
                         "children": [],
+                        "command": "cmd /c taskkill /IM EXCEL.EXE /IM OUTLOOK.EXE /IM olk.exe /IM WINWORD.EXE /IM POWERPNT.EXE /F > nul 2>&1 & exit /b 0",
                         "delay": "0",
-                        "description": "",
+                        "description": "Kill all Office apps for cold boot (PT 8805/8806/8807)",
                         "enabled": true,
-                        "id": "W4ESYUL",
-                        "include_path": "scenarios\\windows\\_library\\misc\\search_taskbar",
-                        "type": "Include"
+                        "id": "MCOBK0",
+                        "type": "Command"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Settle after Office kill",
+                        "enabled": true,
+                        "id": "MCOBK0D",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "command": "cmd /c explorer.exe \"c:\\abl_docs\\FamilyBudget.xlsx\" & exit /b 0",
+                        "delay": "0",
+                        "description": "Excel boot via file association (PT_8806)",
+                        "enabled": true,
+                        "id": "MCOB01",
+                        "type": "Command"
+                    },
+                    {
+                        "children": [],
+                        "delay": "8",
+                        "description": "Wait for Excel",
+                        "enabled": true,
+                        "id": "MCOB01D",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "command": "cmd /c taskkill /IM EXCEL.EXE /F > nul 2>&1 & exit /b 0",
+                        "delay": "2",
+                        "description": "Close Excel",
+                        "enabled": true,
+                        "id": "MCOB02",
+                        "type": "Command"
+                    },
+                    {
+                        "children": [],
+                        "command": "cmd /c explorer.exe \"c:\\abl_docs\\test_long_doc.docx\" & exit /b 0",
+                        "delay": "0",
+                        "description": "Word boot via file association (PT_8805)",
+                        "enabled": true,
+                        "id": "MCOB03",
+                        "type": "Command"
+                    },
+                    {
+                        "children": [],
+                        "delay": "8",
+                        "description": "Wait for Word",
+                        "enabled": true,
+                        "id": "MCOB03D",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "command": "cmd /c taskkill /IM WINWORD.EXE /F > nul 2>&1 & exit /b 0",
+                        "delay": "2",
+                        "description": "Close Word",
+                        "enabled": true,
+                        "id": "MCOB04",
+                        "type": "Command"
+                    },
+                    {
+                        "children": [],
+                        "command": "cmd /c explorer.exe \"c:\\abl_docs\\sample.pptx\" & exit /b 0",
+                        "delay": "0",
+                        "description": "PowerPoint boot via file association (PT_8807)",
+                        "enabled": true,
+                        "id": "MCOB05",
+                        "type": "Command"
+                    },
+                    {
+                        "children": [],
+                        "delay": "8",
+                        "description": "Wait for PowerPoint",
+                        "enabled": true,
+                        "id": "MCOB05D",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "command": "cmd /c taskkill /IM POWERPNT.EXE /F > nul 2>&1 & exit /b 0",
+                        "delay": "2",
+                        "description": "Close PowerPoint",
+                        "enabled": true,
+                        "id": "MCOB06",
+                        "type": "Command"
                     }
                 ],
-                "description": "Best-effort search_taskbar",
+                "description": "Office Boot PTs via file association (cold boot, gated by simple_office_launch)",
                 "enabled": true,
-                "id": "W4ESYUT",
-                "type": "Try"
-            },
-            {
-                "children": [],
-                "description": "Ignore search_taskbar failure",
-                "enabled": true,
-                "id": "W4ESYUE",
-                "type": "Except"
+                "eval_method": "==",
+                "id": "MCOBIF",
+                "left_term": "[simple_office_launch]",
+                "right_term": "1",
+                "type": "If"
             },
             {
                 "children": [],
                 "description": "",
                 "enabled": true,
-                "id": "W4ESYUX",
-                "type": "End Try"
+                "id": "MCOBEN",
+                "type": "End If"
             },
             {
                 "children": [
@@ -950,6 +1041,37 @@
                 "description": "",
                 "enabled": true,
                 "id": "1KPST0X",
+                "type": "End Try"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "W4ESYUL",
+                        "include_path": "scenarios\\windows\\_library\\misc\\search_taskbar",
+                        "type": "Include"
+                    }
+                ],
+                "description": "Best-effort search_taskbar",
+                "enabled": false,
+                "id": "W4ESYUT",
+                "type": "Try"
+            },
+            {
+                "children": [],
+                "description": "Ignore search_taskbar failure",
+                "enabled": false,
+                "id": "W4ESYUE",
+                "type": "Except"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "W4ESYUX",
                 "type": "End Try"
             },
             {

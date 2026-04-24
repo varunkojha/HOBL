@@ -29,30 +29,30 @@
     {
         "children": [],
         "delay": "0.5",
-        "description": "Account Section",
+        "description": "",
         "enabled": true,
         "file_name": [
-            "image_1ALL9MN.png"
+            "image_1KNN1P8.png"
         ],
-        "h": "0.144",
-        "id": "19X3TY0",
+        "h": "0.249",
+        "id": "1KNN1P8",
         "recapture": false,
         "type": "Capture",
-        "w": "0.073",
-        "x": "0.017",
-        "y": "0.779"
+        "w": "0.052",
+        "x": "0.001",
+        "y": "0.706"
     },
     {
-        "capture_id": "19X3TY0",
+        "capture_id": "1KNN1P8",
         "children": [],
         "delay": "2",
         "description": "",
         "enabled": true,
         "exception_on": "No match",
         "file_name": [
-            "image_1ALLJR1.png"
+            "image_1KNN00X.png"
         ],
-        "id": "1ALLJR1",
+        "id": "1KNN00X",
         "match_threshold": "",
         "primary": true,
         "scale": "",
@@ -63,21 +63,21 @@
     {
         "children": [],
         "delay": "0.5",
-        "description": "Manage Settings Region",
+        "description": "",
         "enabled": true,
         "file_name": [
-            "image_1CE9365.png"
+            "image_1KNN0JJ.png"
         ],
-        "h": "0.408",
-        "id": "1CE9365",
+        "h": "0.761",
+        "id": "1KNN0JJ",
         "recapture": false,
         "type": "Capture",
-        "w": "0.376",
-        "x": "0.004",
-        "y": "0.090"
+        "w": "0.682",
+        "x": "0.044",
+        "y": "0.053"
     },
     {
-        "capture_id": "1CE9365",
+        "capture_id": "1KNN0JJ",
         "children": [],
         "delay": "2",
         "description": "Manage Settings Button",

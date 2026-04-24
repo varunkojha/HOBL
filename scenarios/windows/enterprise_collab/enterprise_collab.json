@@ -143,35 +143,13 @@
                         "type": "Code"
                     },
                     {
-                        "children": [
-                            {
-                                "children": [],
-                                "delay": "0",
-                                "description": "",
-                                "enabled": true,
-                                "id": "1EN18UV",
-                                "include_path": "scenarios\\windows\\_library\\enterprise_collab\\diagnostics_enable",
-                                "type": "Include"
-                            }
-                        ],
-                        "description": "Try diagnostics_enable (may fail on DPI mismatch)",
-                        "enabled": true,
-                        "id": "1EN18UT",
-                        "type": "Try"
-                    },
-                    {
                         "children": [],
-                        "description": "Ignore diagnostics_enable failure",
-                        "enabled": true,
-                        "id": "1EN18UE",
-                        "type": "Except"
-                    },
-                    {
-                        "children": [],
+                        "delay": "0",
                         "description": "",
                         "enabled": true,
-                        "id": "1EN18UX",
-                        "type": "End Try"
+                        "id": "1EN18UV",
+                        "include_path": "scenarios\\windows\\_library\\enterprise_collab\\diagnostics_enable",
+                        "type": "Include"
                     },
                     {
                         "children": [],
@@ -840,7 +818,7 @@
                     },
                     {
                         "children": [],
-                        "command": "cmd /c taskkill /f /im SystemSettings.exe >nul 2>&1",
+                        "command": "cmd /c \"taskkill /f /im SystemSettings.exe >nul 2>&1 & exit /b 0\"",
                         "delay": "3",
                         "description": "Kill Settings to force cold launch",
                         "enabled": true,

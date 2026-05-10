@@ -19,11 +19,10 @@ import xml.etree.ElementTree as ET
 
 
 # --- ETL side-channel constants -------------------------------------------------
-# PT_10010 (Type-to-Search TopResultRender) and PT_2430 in StressUtcPerftrack.xml
-# rely on legacy Cortana events that are not emitted on modern Windows builds, so
-# PerfParser cannot complete their state machines. The modern provider that DOES
-# fire is Microsoft.Windows.Health.TestInProduction; we extract the metric
-# directly from the ETL via tracerpt without touching the manifest XML.
+# A subset of PerfTrack scenarios in StressUtcPerftrack.xml depend on legacy
+# event sources that modern Windows builds no longer emit, so PerfParser cannot
+# complete their state machines. For those metrics, an alternate provider is
+# read directly from the ETL via tracerpt.
 _TIP_PROVIDER_GUID = "{50109fbd-6d85-5815-731e-c907eca1607b}"
 _TIP_PROVIDER_NAME = "microsoft.windows.health.testinproduction"
 _TIP_TEST_CASE = "TypeToSearchTestTopResultRendered"
@@ -69,13 +68,14 @@ class Tool(Scenario):
             for scenario in root.iter('scenario'):
                 sname = scenario.get('scenarioname', '')
                 pt_name = scenario.get('ptscenarioname', '')
-                match = re.match(r'PT_(\d+)_', sname)
+                # Accept PT_ and PTSdw_ scenarioname prefixes.
+                match = re.match(r'PT(?:Sdw)?_(\d+)_', sname)
                 if not match:
                     continue
                 pt_num = match.group(1)
                 if pt_name:
                     lookup[pt_name] = pt_num
-                stripped_match = re.match(r'^PT_\d+_(.+)_[^_]*$', sname)
+                stripped_match = re.match(r'^PT(?:Sdw)?_\d+_(.+)_[^_]*$', sname)
                 if stripped_match:
                     parser_form = stripped_match.group(1)
                     if parser_form:
@@ -130,7 +130,7 @@ class Tool(Scenario):
                     duration = row.get('Duration', '').strip()
                     # First try: extract id directly from Scenario column
                     pt = ''
-                    scenario_match = re.match(r'PT_(\d+)_', scenario_name)
+                    scenario_match = re.match(r'PT(?:Sdw)?_(\d+)_', scenario_name)
                     if scenario_match:
                         pt = scenario_match.group(1)
                     # Second try: look up Metric against manifest mapping. This
@@ -156,14 +156,10 @@ class Tool(Scenario):
             if os.path.isfile(raw_output) and not os.path.isfile(perf_output):
                 os.rename(raw_output, perf_output)
 
-        # Side-channel: extract PT_10010 TopResultRender directly from the ETL.
-        # The PT_10010 state machine in StressUtcPerftrack.xml targets legacy
-        # Cortana events that modern Windows does not emit, so PerfParser cannot
-        # produce this metric. We read the modern TestInProduction TestResult
-        # event from the ETL via tracerpt and emit a single averaged row.
-        # Every search/keystroke during the run produces one passing event, so
-        # individual rows can't be tied back to a specific user action; the mean
-        # of all passing samples is the meaningful aggregate.
+        # Side-channel: extract the PT_10010 metric directly from the ETL because
+        # its manifest state machine cannot complete on modern Windows builds.
+        # Emits one row per passing event, matching the behavior used for the
+        # other PT metrics.
         try:
             extra = self._extract_type_to_search(etl_trace)
             if extra and os.path.isfile(perf_output):
@@ -174,16 +170,13 @@ class Tool(Scenario):
                     except (TypeError, ValueError):
                         continue
                 if durations_ms:
-                    avg_ms = sum(durations_ms) / len(durations_ms)
-                    # Round to integer ms to match the format of other rows.
-                    avg_str = str(int(round(avg_ms)))
                     with open(perf_output, 'a', newline='') as f_out:
                         w = csv.writer(f_out)
-                        w.writerow([_TIP_PT_NUMBER, _TIP_METRIC_NAME, avg_str])
+                        for value_ms in durations_ms:
+                            w.writerow([_TIP_PT_NUMBER, _TIP_METRIC_NAME, str(int(round(value_ms)))])
                     logging.info(
-                        f"Perf Stress Tool - Appended PT_{_TIP_PT_NUMBER} "
-                        f"{_TIP_METRIC_NAME} avg={avg_str}ms over "
-                        f"{len(durations_ms)} passing event(s) from ETL side-channel"
+                        f"Perf Stress Tool - Appended {len(durations_ms)} PT_{_TIP_PT_NUMBER} "
+                        f"{_TIP_METRIC_NAME} instance(s) from ETL side-channel"
                     )
         except Exception as e:
             logging.warning(f"TypeToSearch ETL side-channel extraction failed: {e}")

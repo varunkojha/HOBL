@@ -12,10 +12,6 @@ def run(scenario):
         logging.info('Skipping background trace/stress scripts because stress_run is disabled')
         return
 
-    # UTC side-load and telemetry service restart are handled by Phase 1 in perf_stress.py setUp().
-    # This code block only needs to upload stress scripts and start the stress workload.
-    # Registry settings for telemetry are also set in Phase 1.
-
     src_dir = os.path.dirname(__file__)
     repo_root = os.path.abspath(os.path.join(src_dir, "..", "..", ".."))
     dut_bin_dir = r"C:\hobl_bin"

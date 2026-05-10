@@ -10,5 +10,5 @@ def run():
     return
 
 def run_user_only():
-    import_run_user_only('scenarios\\windows\\_library\\misc\\etw_event_tag')
+    import_run_user_only('scenarios\\windows\\_library\\misc\\capture_taskbar')
     return

@@ -72,15 +72,16 @@ class CommCheck(core.app_scenario.Scenario):
         # Async SimpleRemote
         if (self.async_comm == "1"):
             try:
-                if self.platform.lower() == "windows":
-                    output = self._call(["cmd.exe", "/c echo ok"], timeout=5)
-                elif self.platform.lower() == "macos":
-                    output = self._call(["zsh", '-c "echo ok"'], timeout=5)
-                else:
-                    logging.error(f"Unsupported platform {self.platform}")
-                    self.fail(f"Unsupported platform {self.platform}")
+                output = self._call(["curl", "-V"], timeout=5)
+                # if self.platform.lower() == "windows":
+                #     output = self._call(["cmd.exe", "/c echo ok"], timeout=5)
+                # elif self.platform.lower() == "macos":
+                #     output = self._call(["zsh", '-c "echo ok"'], timeout=5)
+                # else:
+                #     logging.error(f"Unsupported platform {self.platform}")
+                #     self.fail(f"Unsupported platform {self.platform}")
                 logging.debug(output)
-                if "ok" in output:
+                if "Release-Date" in output:
                     logging.info("SimpleRemote Async:\tOK")
                 else:
                     logging.info("SimpleRemote Async:\tFAIL")
@@ -90,26 +91,26 @@ class CommCheck(core.app_scenario.Scenario):
                 failed = True
 
         # WinAppDriver
-        # try:
-        if self.platform.lower() == "windows":
-            self._call([(self.dut_exec_path + "\\WindowsApplicationDriver\\WinAppDriver.exe"), (self.dut_resolved_ip + " " + self.app_port)], blocking=False, timeout=5)
-            time.sleep(1)
-            desired_caps = {}
-            desired_caps["app"] = "Root"
-            desktop = self._launchApp(desired_caps)
-            logging.info("WinAppDriver launch:\tOK")
-            # except:
-            #     logging.info("WinAppDriver launch:\tFAIL")
-            #     failed = True
+        # Note: currently self.dut_resolved_ip is not defined for comm_check
+        # if self.platform.lower() == "windows":
+        #     self._call([(self.dut_exec_path + "\\WindowsApplicationDriver\\WinAppDriver.exe"), (self.dut_resolved_ip + " " + self.app_port)], blocking=False, timeout=5)
+        #     time.sleep(1)
+        #     desired_caps = {}
+        #     desired_caps["app"] = "Root"
+        #     desktop = self._launchApp(desired_caps)
+        #     logging.info("WinAppDriver launch:\tOK")
+        #     # except:
+        #     #     logging.info("WinAppDriver launch:\tFAIL")
+        #     #     failed = True
 
-            try:
-                desktop.find_element_by_name("Start")
-                self._kill("winappdriver.exe")
-                logging.info("WinAppDriver comm:\tOK")
-            except:
-                logging.info("WinAppDriver comm:\tFAIL")
-                self._page_source(desktop)
-                failed = True
+        #     try:
+        #         desktop.find_element_by_name("Start")
+        #         self._kill("winappdriver.exe")
+        #         logging.info("WinAppDriver comm:\tOK")
+        #     except:
+        #         logging.info("WinAppDriver comm:\tFAIL")
+        #         self._page_source(desktop)
+        #         failed = True
         
         if failed:
             self.fail("At least one communication check failed")

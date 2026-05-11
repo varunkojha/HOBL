@@ -12,15 +12,25 @@
     {
         "children": [],
         "delay": "0",
-        "description": "",
+        "description": "Launch Snipping Tool via Start menu search (fires Microsoft.Windows.AppLifeCycle.UI.AppLaunch_UserClick with appId=Microsoft.ScreenSketch_8wekyb3d8bbwe!App, satisfying PT_9971 state machine T0 transition reliably on all devices). Win+Shift+S alone does not raise AppLaunch_UserClick on every SKU/build.",
         "enabled": true,
-        "id": "1LEKCYH",
-        "include_path": "scenarios\\windows\\_library\\misc\\etw_event_tag",
+        "id": "1LEKSL0",
+        "include_path": "scenarios\\windows\\_library\\misc\\start_app_launch",
         "params": [
             {
-                "name": "[event_tag]",
+                "name": "[app_name]",
                 "val_options": "",
-                "value": "SnippintToolLaunch"
+                "value": "Snipping Tool"
+            },
+            {
+                "name": "[etw_event_tag]",
+                "val_options": "",
+                "value": "SnippingToolLaunch"
+            },
+            {
+                "name": "[app_open_delay]",
+                "val_options": "",
+                "value": "3"
             }
         ],
         "type": "Include"
@@ -28,7 +38,7 @@
     {
         "children": [],
         "delay": "2",
-        "description": "Launch Snipping Tool",
+        "description": "Trigger Snipping Tool overlay via Win+Shift+S (fires Microsoft.ScreenSketch.LaunchedFrom T2 + Microsoft.ScreenSketch.ReadyForSelection T3, completing PT_9971 state machine started by the Start-menu launch above).",
         "enabled": true,
         "id": "1LEHK1R",
         "text": "\ue03d\ue008s",

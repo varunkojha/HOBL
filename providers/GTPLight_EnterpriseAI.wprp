@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WindowsPerformanceRecorder Author="HOBL Enterprise AI" Version="1">
+  <Profiles>
+    <SystemCollector Id="SystemCollector_EnterpriseAI" Name="EnterpriseAI_KernelLogger" HostGuestCorrelation="true">
+      <BufferSize Value="2048" />
+      <Buffers Value="40" />
+    </SystemCollector>
+    <EventCollector Id="EventCollector_EnterpriseAI" Name="EnterpriseAI_EventLogger" HostGuestCorrelation="true">
+      <BufferSize Value="1024" />
+      <Buffers Value="10" />
+    </EventCollector>
+    <SystemProvider Id="SystemProvider_EnterpriseAI_Light">
+      <Keywords>
+        <Keyword Value="MemoryInfo" />
+        <Keyword Value="MemoryInfoWS" />
+        <Keyword Value="HardFaults" />
+        <Keyword Value="ProcessThread" />
+        <Keyword Value="Loader" />
+      </Keywords>
+    </SystemProvider>
+    <EventProvider Id="EventProvider_EnterpriseAI_PerfTrack" Name="PerfTrack" NonPagedMemory="true" Level="4" />
+    <EventProvider Id="EventProvider_EnterpriseAI_UTC" Name="UTC" NonPagedMemory="true" Level="4" />
+    <EventProvider Id="EventProvider_EnterpriseAI_TIP" Name="50109fbd-6d85-5815-731e-c907eca1607b" NonPagedMemory="true" Level="5" EventKey="true" />
+    <EventProvider Id="EventProvider_EnterpriseAI_InputInject" Name="150a3791-7792-452d-858c-15d647ecb48f" NonPagedMemory="true" Level="5" />
+    <EventProvider Id="EventProvider_EnterpriseAI_ShellCore" Name="30336ed4-e327-447c-9de0-51b652c86108" NonPagedMemory="true" Level="5">
+      <Keywords>
+        <Keyword Value="0x1000000000000" />
+      </Keywords>
+    </EventProvider>
+    <!-- AI event schemas, default keyword coverage, and capture overhead require DUT validation. -->
+    <EventProvider Id="EventProvider_EnterpriseAI_WindowsSearchCore" Name="49c2c27c-fe2d-40bf-8c4e-c3fb518037e7" NonPagedMemory="true" Level="5" />
+    <EventProvider Id="EventProvider_EnterpriseAI_AIFabric" Name="434877dc-e809-46b5-9168-38c27e6e332e" NonPagedMemory="true" Level="5" />
+    <EventProvider Id="EventProvider_EnterpriseAI_AIFabricTelemetry" Name="87410d84-3bac-53d7-7f6a-d3257c8cc59f" NonPagedMemory="true" Level="5" />
+    <EventProvider Id="EventProvider_EnterpriseAI_ONNX" Name="929dd115-1ecb-4cb5-b060-ebd4983c421d" NonPagedMemory="true" Level="5">
+      <CaptureStateOnStart>
+        <Keyword Value="0x1" />
+      </CaptureStateOnStart>
+      <CaptureStateOnSave>
+        <Keyword Value="0x1" />
+      </CaptureStateOnSave>
+    </EventProvider>
+    <EventProvider Id="EventProvider_EnterpriseAI_ORT" Name="3a26b1ff-7484-7484-7484-15261f42614d" NonPagedMemory="true" Level="5" />
+    <EventProvider Id="EventProvider_EnterpriseAI_WinML" Name="d766d9ff-112c-4dac-9247-241cf99d123f" NonPagedMemory="true" Level="5" />
+    <EventProvider Id="EventProvider_EnterpriseAI_AIPlatform" Name="afe60d91-90d2-59bd-ebbf-d321f5691437" NonPagedMemory="true" Level="5" />
+    <EventProvider Id="EventProvider_EnterpriseAI_PerceptiveShell" Name="45aa7ae8-974c-5bbd-d7b5-8ea567dac172" NonPagedMemory="true" Level="5" />
+    <Profile Id="EnterpriseAI.Verbose.File" Name="EnterpriseAI" Description="Light memory/hard faults, foreground PTs, and native AI observations" LoggingMode="File" DetailLevel="Verbose" Default="true">
+      <ProblemCategories>
+        <ProblemCategory Value="First Level Triage" />
+      </ProblemCategories>
+      <Collectors>
+        <SystemCollectorId Value="SystemCollector_EnterpriseAI">
+          <SystemProviderId Value="SystemProvider_EnterpriseAI_Light" />
+        </SystemCollectorId>
+        <EventCollectorId Value="EventCollector_EnterpriseAI">
+          <EventProviders>
+            <EventProviderId Value="EventProvider_EnterpriseAI_PerfTrack" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_UTC" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_TIP" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_InputInject" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_ShellCore" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_WindowsSearchCore" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_AIFabric" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_AIFabricTelemetry" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_ONNX" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_ORT" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_WinML" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_AIPlatform" />
+            <EventProviderId Value="EventProvider_EnterpriseAI_PerceptiveShell" />
+          </EventProviders>
+        </EventCollectorId>
+      </Collectors>
+    </Profile>
+  </Profiles>
+  <TraceMergeProperties>
+    <TraceMergeProperty Id="TraceMerge_EnterpriseAI" Name="TraceMerge_Default">
+      <CustomEvents>
+        <CustomEvent Value="ImageId" />
+        <CustomEvent Value="BuildInfo" />
+        <CustomEvent Value="VolumeMapping" />
+        <CustomEvent Value="EventMetadata" />
+        <CustomEvent Value="PerfTrackMetadata" />
+        <CustomEvent Value="WinSAT" />
+      </CustomEvents>
+    </TraceMergeProperty>
+  </TraceMergeProperties>
+</WindowsPerformanceRecorder>

@@ -21,6 +21,17 @@ Collect various system logs.
 
 Nonfuctional.  Needs to be updated for new architecture.
 
+## enterprise_ai
+
+An isolated Enterprise Collab-derived workload for observing Windows semantic-indexing
+activity with foreground productivity and optional owned CPU stress. Includes a
+six-condition experiment matrix, lightweight UTC/AI capture, strict evidence checks,
+and scalar report output. Capture-only results are explicitly inconclusive, not
+performance-gate results. Measured semantic queries and model/API execution remain
+gated until their approved runners and completion contracts are validated on a DUT.
+
+See [Enterprise AI setup, safety, metrics, and validation](HOBL_EnterpriseAI.md).
+
 ## iperf3
 
 Runs iperf3 network throughput tests against a remote server while measuring power.
@@ -817,4 +828,3 @@ Local user is sharing desktop.
 `collect_MSTeams_Logs` - Set to 1 to collect MS Teams logs of the meeting after exiting the meeting. **Default:** `1`  **Options:** `0, 1`
 
 `maintain_bots` - Set to 1 to have the test peridically check that all bots are present in the call and add bots if needed. **Default:** `0`  **Options:** `0, 1`
-

@@ -1,0 +1,872 @@
+[
+    {
+        "author": "dasashutosh",
+        "capture_device": "",
+        "children": [],
+        "create_date": "2025-12-02",
+        "description": "Enterprise AI foreground actions, adapted from Enterprise Collaborator.",
+        "enabled": true,
+        "id": "19K3NWN",
+        "type": "Information"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "19K5VMA",
+        "name": "[background_timers]",
+        "type": "Set Default",
+        "val_options": "0,1",
+        "value": "1"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "19K5VX0",
+        "name": "[background_teams]",
+        "type": "Set Default",
+        "val_options": "0,1",
+        "value": "1"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "19MUEJ4",
+        "name": "[simple_office_launch]",
+        "type": "Set Default",
+        "val_options": "1,0",
+        "value": "1"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "19K7X90",
+        "name": "[web_replay_run]",
+        "type": "Set",
+        "value": "1"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "19K7XML",
+        "name": "[phase_reporting]",
+        "type": "Set",
+        "value": "1"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "2D0001",
+        "name": "[file_explorer]",
+        "type": "Set Default",
+        "val_options": "0,1",
+        "value": "1"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "2D0003",
+        "name": "[snipping_tool]",
+        "type": "Set Default",
+        "val_options": "0,1",
+        "value": "1"
+    },
+    {
+        "children": [],
+        "delay": "0.0",
+        "description": "",
+        "enabled": true,
+        "id": "2D0004",
+        "name": "[settings_app]",
+        "type": "Set Default",
+        "val_options": "0,1",
+        "value": "1"
+    },
+    {
+        "children": [
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "command": "cmd /c if not exist \"%USERPROFILE%\\Desktop\\test.txt\" echo test > \"%USERPROFILE%\\Desktop\\Test.txt\"",
+                        "delay": "2",
+                        "description": "Create test.txt on Desktop for context menu test",
+                        "enabled": true,
+                        "id": "2D0010",
+                        "type": "Command"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "2D0011",
+                "left_term": "[file_explorer]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "2D0012",
+                "type": "End If"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "1A7H33K",
+                        "include_path": "scenarios\\windows\\_library\\enterprise_collab\\timers_setup",
+                        "type": "Include"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "19K410A",
+                "left_term": "[background_timers]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "19K410C",
+                "type": "End If"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0.0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "19V8920",
+                        "name": "[teams:number_of_bots]",
+                        "type": "Set",
+                        "value": "9"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "19K4CEU",
+                        "include_path": "scenarios\\windows\\_library\\Teams\\teams_setup",
+                        "type": "Include"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "19K41HR",
+                "left_term": "[background_teams]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "19K41HT",
+                "type": "End If"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "19K4E5H",
+                        "include_path": "scenarios\\windows\\_library\\productivity\\prod_setup",
+                        "type": "Include"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "19MUF2P",
+                "left_term": "[simple_office_launch]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "19MUF2R",
+                "type": "End If"
+            }
+        ],
+        "description": "",
+        "enabled": true,
+        "id": "19K3TWR",
+        "type": "Setup"
+    },
+    {
+        "children": [
+            {
+                "children": [],
+                "delay": "10",
+                "description": "",
+                "enabled": true,
+                "id": "1A4X1TN",
+                "type": "Delay"
+            },
+            {
+                "children": [],
+                "delay": "0",
+                "description": "",
+                "enabled": true,
+                "id": "1A4W5AL",
+                "include_path": "scenarios\\windows\\_library\\web\\web_setup",
+                "params": [
+                    {
+                        "name": "[disable_delay]",
+                        "val_options": "0,1",
+                        "value": "1"
+                    }
+                ],
+                "type": "Include"
+            },
+            {
+                "children": [],
+                "delay": "0",
+                "description": "",
+                "enabled": true,
+                "id": "19K57MP",
+                "include_path": "scenarios\\windows\\_library\\web\\web_run_12",
+                "params": [
+                    {
+                        "name": "[load_only]",
+                        "val_options": "0,1",
+                        "value": "0"
+                    }
+                ],
+                "type": "Include"
+            },
+            {
+                "children": [],
+                "delay": "0",
+                "description": "",
+                "enabled": true,
+                "id": "1JP44RV",
+                "include_path": "scenarios\\windows\\_library\\web\\web_check",
+                "params": [
+                    {
+                        "name": "[youtube_duration]",
+                        "val_options": "",
+                        "value": "90"
+                    }
+                ],
+                "type": "Include"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "19K5834",
+                        "include_path": "scenarios\\windows\\_library\\productivity\\prod_open",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "19K59V7",
+                        "include_path": "scenarios\\windows\\_library\\productivity\\prod_close",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "1CFNENY",
+                        "include_path": "scenarios\\windows\\_library\\web\\web_switchto",
+                        "type": "Include"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "19MUFJ9",
+                "left_term": "[simple_office_launch]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "19MUFJC",
+                "type": "End If"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D1000",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_begin",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D1001",
+                        "include_path": "scenarios\\windows\\_library\\misc\\etw_event_tag",
+                        "params": [
+                            {
+                                "name": "[event_tag]",
+                                "val_options": "",
+                                "value": "FileExplorerLaunch"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D1002",
+                        "include_path": "scenarios\\windows\\_library\\misc\\click_file_explorer",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "5",
+                        "description": "Wait for File Explorer to fully render",
+                        "enabled": true,
+                        "id": "2D1003",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D1004",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_end",
+                        "params": [
+                            {
+                                "name": "[phase_category]",
+                                "val_options": "",
+                                "value": "app_launch"
+                            },
+                            {
+                                "name": "[phase_name]",
+                                "val_options": "",
+                                "value": "file_explorer_launch"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Wait after FE render",
+                        "enabled": true,
+                        "id": "2D1005",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "1",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D2000",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_begin",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "2",
+                        "description": "Navigate to Desktop via Ctrl+L",
+                        "enabled": true,
+                        "id": "2D2001",
+                        "text": "\ue009l",
+                        "type": "Type",
+                        "typing_delay": "100"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Type Desktop path and press Enter",
+                        "enabled": true,
+                        "id": "2D2002",
+                        "text": "[userprofile]\\Desktop\ue007",
+                        "type": "Type",
+                        "typing_delay": "50"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Wait for Desktop folder to load",
+                        "enabled": true,
+                        "id": "2D2003",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0.5",
+                        "description": "File Explorer content area",
+                        "enabled": true,
+                        "file_name": [
+                            "image_fe_content.png"
+                        ],
+                        "h": "0.800",
+                        "id": "2D2004",
+                        "recapture": true,
+                        "type": "Capture",
+                        "w": "0.800",
+                        "x": "0.100",
+                        "y": "0.100"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D2005",
+                        "include_path": "scenarios\\windows\\_library\\misc\\etw_event_tag",
+                        "params": [
+                            {
+                                "name": "[event_tag]",
+                                "val_options": "",
+                                "value": "ContextMenuOpen"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "capture_id": "2D2004",
+                        "children": [],
+                        "delay": "2",
+                        "description": "Right click on test.txt",
+                        "enabled": true,
+                        "exception_on": "No match",
+                        "file_name": [
+                            "image_1J5C9RW.png"
+                        ],
+                        "id": "1J5C9RW",
+                        "match_threshold": "",
+                        "primary": false,
+                        "scale": "",
+                        "type": "Click",
+                        "x": "0.500",
+                        "y": "0.500"
+                    },
+                    {
+                        "children": [],
+                        "delay": "5",
+                        "description": "Wait for Context Menu to render",
+                        "enabled": true,
+                        "id": "2D2007",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "1",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D2008",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_end",
+                        "params": [
+                            {
+                                "name": "[phase_category]",
+                                "val_options": "",
+                                "value": "app_launch"
+                            },
+                            {
+                                "name": "[phase_name]",
+                                "val_options": "",
+                                "value": "context_menu"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "2",
+                        "description": "Dismiss context menu via Escape",
+                        "enabled": true,
+                        "id": "2D2009",
+                        "text": "\ue00c",
+                        "type": "Type",
+                        "typing_delay": "100"
+                    },
+                    {
+                        "children": [],
+                        "delay": "2",
+                        "description": "Close File Explorer via Alt+F4",
+                        "enabled": true,
+                        "id": "2D200A",
+                        "text": "\ue00a\ue034",
+                        "type": "Type",
+                        "typing_delay": "100"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Wait after close",
+                        "enabled": true,
+                        "id": "2D200B",
+                        "type": "Delay"
+                    }
+                ],
+                "description": "File Explorer launch + Context Menu",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "2D1010",
+                "left_term": "[file_explorer]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "2D1011",
+                "type": "End If"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D3000",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_begin",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D3001",
+                        "include_path": "scenarios\\windows\\_library\\misc\\etw_event_tag",
+                        "params": [
+                            {
+                                "name": "[event_tag]",
+                                "val_options": "",
+                                "value": "SnippingToolLaunch"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Launch Snipping Tool via Win+Shift+S",
+                        "enabled": true,
+                        "id": "2D3002",
+                        "text": "\ue03d\ue008s",
+                        "type": "Type",
+                        "typing_delay": "100"
+                    },
+                    {
+                        "children": [],
+                        "delay": "5",
+                        "description": "Wait for Snipping Tool overlay to appear",
+                        "enabled": true,
+                        "id": "2D3003",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D3004",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_end",
+                        "params": [
+                            {
+                                "name": "[phase_category]",
+                                "val_options": "",
+                                "value": "app_launch"
+                            },
+                            {
+                                "name": "[phase_name]",
+                                "val_options": "",
+                                "value": "snipping_tool_launch"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Dismiss Snipping Tool overlay via Escape",
+                        "enabled": true,
+                        "id": "2D3005",
+                        "text": "\ue00c",
+                        "type": "Type",
+                        "typing_delay": "100"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Wait after dismiss",
+                        "enabled": true,
+                        "id": "2D3006",
+                        "type": "Delay"
+                    }
+                ],
+                "description": "Snipping Tool via Win+Shift+S",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "2D3010",
+                "left_term": "[snipping_tool]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "2D3011",
+                "type": "End If"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D4000",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_begin",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "command": "cmd /c taskkill /f /im SystemSettings.exe >nul 2>&1",
+                        "delay": "3",
+                        "description": "Kill Settings to force cold launch",
+                        "enabled": true,
+                        "id": "2D4006",
+                        "type": "Command"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D4001",
+                        "include_path": "scenarios\\windows\\_library\\misc\\click_settings",
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "5",
+                        "description": "Wait for Settings App to fully render (Home page)",
+                        "enabled": true,
+                        "id": "2D4002",
+                        "type": "Delay"
+                    },
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "2D4003",
+                        "include_path": "scenarios\\windows\\_library\\misc\\recording_phase_end",
+                        "params": [
+                            {
+                                "name": "[phase_category]",
+                                "val_options": "",
+                                "value": "app_launch"
+                            },
+                            {
+                                "name": "[phase_name]",
+                                "val_options": "",
+                                "value": "settings_app_launch"
+                            }
+                        ],
+                        "type": "Include"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Close Settings App via Alt+F4",
+                        "enabled": true,
+                        "id": "2D4004",
+                        "text": "\ue00a\ue034",
+                        "type": "Type",
+                        "typing_delay": "100"
+                    },
+                    {
+                        "children": [],
+                        "delay": "3",
+                        "description": "Wait after close",
+                        "enabled": true,
+                        "id": "2D4005",
+                        "type": "Delay"
+                    }
+                ],
+                "description": "Settings App launch from search",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "2D4010",
+                "left_term": "[settings_app]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "2D4011",
+                "type": "End If"
+            },
+            {
+                "children": [],
+                "delay": "0",
+                "description": "",
+                "enabled": true,
+                "id": "19K59KV",
+                "include_path": "scenarios\\windows\\_library\\web\\web_close_tabs",
+                "params": [
+                    {
+                        "name": "[num_tabs_to_close]",
+                        "val_options": "",
+                        "value": "[web:tabs]"
+                    }
+                ],
+                "type": "Include"
+            }
+        ],
+        "description": "",
+        "enabled": true,
+        "id": "19K42E3",
+        "type": "Run Test"
+    },
+    {
+        "children": [
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "1A7H8T4",
+                        "include_path": "scenarios\\windows\\_library\\enterprise_collab\\timers_teardown",
+                        "type": "Include"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "19L6CT3",
+                "left_term": "[background_timers]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "19L6CT4",
+                "type": "End If"
+            },
+            {
+                "children": [],
+                "delay": "0",
+                "description": "",
+                "enabled": true,
+                "id": "19K5ENF",
+                "include_path": "scenarios\\windows\\_library\\web\\web_kill",
+                "type": "Include"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "19K5FCT",
+                        "include_path": "scenarios\\windows\\_library\\productivity\\prod_kill",
+                        "type": "Include"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "19MUFWM",
+                "left_term": "[simple_office_launch]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "19MUFWN",
+                "type": "End If"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "delay": "0",
+                        "description": "",
+                        "enabled": true,
+                        "id": "19K8C22",
+                        "include_path": "scenarios\\windows\\_library\\Teams\\teams_teardown",
+                        "type": "Include"
+                    }
+                ],
+                "description": "",
+                "enabled": true,
+                "eval_method": "==",
+                "id": "19L6E7K",
+                "left_term": "[background_teams]",
+                "right_term": "1",
+                "type": "If"
+            },
+            {
+                "children": [],
+                "description": "",
+                "enabled": true,
+                "id": "19L6E7L",
+                "type": "End If"
+            }
+        ],
+        "description": "",
+        "enabled": true,
+        "id": "19K42JX",
+        "type": "Teardown"
+    }
+]
